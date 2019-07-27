@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="RobotService.Service1" CodeBehind="Robot.svc.cs" %>
