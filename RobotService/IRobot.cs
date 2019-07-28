@@ -12,8 +12,17 @@ namespace RobotService
     [ServiceContract(CallbackContract = typeof(IMyContractCallBack))]
     public interface IRobot
     {
+        [OperationContract]
+        bool GetWindow(string windowTitle);
+
         [OperationContract(IsOneWay = true)]
-        void NormalFunction();
+        void MoveMouse(int x, int y);
+
+        [OperationContract(IsOneWay = true)]
+        void MouseCLick();
+
+        [OperationContract(IsOneWay = true)]
+        void SetText(string text);
     }
 
     public interface IMyContractCallBack

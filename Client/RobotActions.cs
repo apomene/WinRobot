@@ -20,7 +20,7 @@ namespace Client
         {
             InstanceContext context = new InstanceContext(this);
             proxy = new RobotClient(context);
-            proxy.NormalFunction();
+            proxy.GetWindow("test.txt - Notepad");
         }
 
         public void Dispose()
