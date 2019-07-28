@@ -4,10 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfRobotServer"
+        xmlns:vm="clr-namespace:WpfRobotServer.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Robot Server" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        DataContext="{DynamicResource ViewModelMain}">
+    <Window.Resources>
+        <vm:ViewModelMain x:Key="ViewModelMain"/>
+    </Window.Resources>
+   
     <Grid>
-        <TextBlock x:Name="txtLog" HorizontalAlignment="Left" Margin="105,170,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="100" Width="353"/>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="Select Actions" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        <Button Command="{Binding SetWindowByTitle}"  CommandParameter="{Binding Text, ElementName=txtTitle}" Margin="10" Grid.Row="1" FontSize="14" Content="Set Active Window"/>
+        <TextBlock Name="txtTitle" Text="{Binding TextTitle, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="3" Grid.Row="1" Grid.Column="1" FontSize="16"></TextBlock>
+        <Button Margin="10" Grid.Row="2" FontSize="14" Content="Set Text "/>
+        <ListBox x:Name="KeysList" Grid.Row="2" Grid.Column="1">
+            
+        </ListBox>
     </Grid>
 </Window>

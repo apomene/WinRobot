@@ -27,7 +27,13 @@ namespace WpfRobotServer
         public MainWindow()
         {
             InitializeComponent();
+            InitControls();
             StartRobot();
+        }
+
+        private void InitControls()
+        {
+            KeysList.ItemsSource = new List<string>() { "A","B","Hello WOrld!!","{ENTER}" };
         }
 
         private void StartRobot()
