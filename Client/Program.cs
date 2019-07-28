@@ -10,9 +10,8 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            RobotActions.RobotClient robot = new RobotActions.RobotClient();
-            var test = robot.GetData(3);
-            Console.WriteLine(test);
+            Actions robot = new Actions();
+            robot.callService();
             Console.Read();
         }
     }

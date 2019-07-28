@@ -25,7 +25,6 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="8c740a48-1348-4fee-a3be-06c321c3a7bc" SourceId="1" SourceUrl="http://localhost:8080/robotService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="556867ac-de93-4886-a5f6-6b62e56fca22" SourceId="1" SourceUrl="http://localhost:8080/robotService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="7cab4fff-02f3-4141-ba2b-a7c52cfa69ba" SourceId="1" SourceUrl="http://localhost:8080/robotService/mex" />
-    <MetadataFile FileName="RobotService.xsd" MetadataType="Schema" ID="36709586-ea09-4b89-81e4-474eebebbb66" SourceId="1" SourceUrl="http://localhost:8080/robotService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

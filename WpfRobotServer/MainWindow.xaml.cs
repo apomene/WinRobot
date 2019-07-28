@@ -52,7 +52,7 @@ namespace WpfRobotServer
                     //  "mex"
                     //);
                     host.AddServiceEndpoint(typeof(IRobot),
-                        new BasicHttpBinding(), "http://localhost:8080/robotService/");
+                        new WSDualHttpBinding(), "http://localhost:8080/robotService/");
 
                    // host.AddServiceEndpoint(typeof(IRobot),
                     //    new WSHttpBinding(), "http://localhost:8080/robotService/wsAddress");
