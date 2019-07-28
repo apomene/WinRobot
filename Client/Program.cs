@@ -11,7 +11,11 @@ namespace Client
         static void Main(string[] args)
         {
             Actions robot = new Actions();
-            robot.callService();
+            
+            robot.GetWindow();
+            robot.SetText("Hi");
+            robot.SetText("{ENTER}");
+            robot.SetText("All!!");
             Console.Read();
         }
     }

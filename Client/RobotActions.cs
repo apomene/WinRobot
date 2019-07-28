@@ -11,16 +11,34 @@ namespace Client
     internal class Actions:IDisposable,IRobotCallback
     {
         RobotActions.RobotClient proxy;
+
+        public Actions()
+        {
+            //InstanceContext context = new InstanceContext(this);
+            //proxy = new RobotClient(context);
+        }
         public void CallBackFunction(string str)
         {
             Console.WriteLine(str);
         }
 
-        public void callService()
+        public void GetWindow()
         {
             InstanceContext context = new InstanceContext(this);
             proxy = new RobotClient(context);
             proxy.GetWindow("test.txt - Notepad");
+        }
+
+        public void MouseClick()
+        {         
+            proxy.MouseCLick();
+        }
+
+        public void SetText(string keys)
+        {
+            InstanceContext context = new InstanceContext(this);
+            proxy = new RobotClient(context);
+            proxy.SetText(keys);
         }
 
         public void Dispose()
