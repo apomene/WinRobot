@@ -8,13 +8,13 @@ using System.Text;
 
 namespace RobotService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class Robot : IRobot
     {
-        public string GetData(int value)
+        public void NormalFunction()
         {
-            return string.Format("You entered: {0}", value);
+            IMyContractCallBack callback = OperationContext.Current.GetCallbackChannel<IMyContractCallBack>();
+            callback.CallBackFunction("Calling from Call Back");
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
