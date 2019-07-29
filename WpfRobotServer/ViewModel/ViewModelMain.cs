@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
-
+using WpfRobotServer.RobotActions;
+using System.ServiceModel;
+using WpfRobotServer.Model;
 
 namespace WpfRobotServer.ViewModel
 {
@@ -34,10 +36,15 @@ namespace WpfRobotServer.ViewModel
             SetWindowByTitle = new RelayCommand(SetWindow);
         }
 
+        RobotClient proxy;
         private void SetWindow(object parameter)
         {
             //The server sends the action or action script to the connected client. 
-            string test = "1";
+            // InstanceContext context = new InstanceContext(this);
+            //proxy = new RobotClient(context);
+            Actions robotActions = new Actions();
+            robotActions.GetWindow("test.txt - Notepad");
+
         }
     }
 }

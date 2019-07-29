@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace RobotService
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class Robot : IRobot
     {
         #region Imports For Set Window by Ttile
@@ -30,22 +30,25 @@ namespace RobotService
         private const int MOUSEEVENTF_RIGHTUP = 0x10;
         #endregion
 
-        public bool GetWindow(string windowTitle)
+        public void GetWindow(string windowTitle)
         {
-            //    IMyContractCallBack callback = OperationContext.Current.GetCallbackChannel<IMyContractCallBack>();
-            //    callback.CallBackFunction("Calling from Call Back");
+            IActionCallBack callback = OperationContext.Current.GetCallbackChannel<IActionCallBack>();
+               //callback.CallBackFunction("Calling from Call Back");           
+             callback.CallBackGetWindow(windowTitle);
             //Find the window, using the CORRECT Window Title, for example, Notepad
             int hWnd = FindWindow(null, windowTitle);
             if (hWnd > 0) //If found
             {
                 SetForegroundWindow(hWnd);
-                return true;
+                callback.CallBackGetWindow(windowTitle);
+                //return true;
             }
             else //Not Found
             {
-                return false;
+                // return false;
             }
         }
+
 
         public void MoveMouse(int x, int y)
         {
@@ -63,6 +66,14 @@ namespace RobotService
         {
             SendKeys.SendWait(text);
         }
+
+        //IActionCallBack Callback
+        //{
+        //    get
+        //    {
+        //        return OperationContext.Current.GetCallbackChannel<IActionCallBack> ();
+        //    }
+        //}
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {

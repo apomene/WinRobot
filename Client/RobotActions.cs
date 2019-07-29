@@ -5,11 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using Client.RobotActions;
+using RobotService;
+using System.Runtime.InteropServices;
+using System.Windows.Input;
 
 namespace Client
 {
-    internal class Actions:IDisposable,IRobotCallback
+    internal class Actions:IDisposable
     {
+        #region Imports For Set Window by Ttile
+        [DllImportAttribute("User32.dll")]
+        private static extern int FindWindow(String ClassName, String WindowName);
+        [DllImportAttribute("User32.dll")]
+        private static extern IntPtr SetForegroundWindow(int hWnd);
+        #endregion
         RobotActions.RobotClient proxy;
 
         public Actions()
@@ -44,6 +53,21 @@ namespace Client
         public void Dispose()
         {
             proxy.Close();
+        }
+
+        public void CallBackGetWindow(string windowTitle)
+        {
+            //Find the window, using the CORRECT Window Title, for example, Notepad
+            int hWnd = FindWindow(null, windowTitle);
+            if (hWnd > 0) //If found
+            {
+                SetForegroundWindow(hWnd);
+                //return true;
+            }
+            else //Not Found
+            {
+               // return false;
+            }
         }
     }
 }

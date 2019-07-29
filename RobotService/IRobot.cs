@@ -9,11 +9,11 @@ using System.Text;
 namespace RobotService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
-    [ServiceContract(CallbackContract = typeof(IMyContractCallBack))]
+    [ServiceContract(CallbackContract = typeof(IActionCallBack))]
     public interface IRobot
     {
-        [OperationContract]
-        bool GetWindow(string windowTitle);
+        [OperationContract(IsOneWay = true)]
+        void GetWindow(string windowTitle);
 
         [OperationContract(IsOneWay = true)]
         void MoveMouse(int x, int y);
@@ -25,10 +25,10 @@ namespace RobotService
         void SetText(string text);
     }
 
-    public interface IMyContractCallBack
+    public interface IActionCallBack
     {
         [OperationContract(IsOneWay = true)]
-        void CallBackFunction(string str);
+        void CallBackGetWindow(string actionScript);
     }
 
 
