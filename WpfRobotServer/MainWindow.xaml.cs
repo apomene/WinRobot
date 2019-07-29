@@ -28,7 +28,7 @@ namespace WpfRobotServer
         {
             InitializeComponent();
             InitControls();
-            StartRobot();
+           // StartRobot();
         }
 
         private void InitControls()

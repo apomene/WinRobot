@@ -55,7 +55,10 @@
     <Compile Include="RobotActions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Connected Services\RobotActions\service.wsdl" />
     <None Include="Connected Services\RobotActions\service.xsd">
       <SubType>Designer</SubType>
@@ -81,6 +84,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RobotService\RobotService.csproj">
+      <Project>{e3b366d0-59cb-47af-a0e1-4df0eab1ea63}</Project>
+      <Name>RobotService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
