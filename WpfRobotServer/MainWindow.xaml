@@ -14,26 +14,40 @@
    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"></ColumnDefinition>
-            <ColumnDefinition Width="20*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="20*"></ColumnDefinition>
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+            <ColumnDefinition Width="15*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+            <ColumnDefinition Width="15 *"></ColumnDefinition>
+            
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="5 *"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
-            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Content="Select Actions" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-        <Button Command="{Binding SetWindowByTitle}"  CommandParameter="{Binding Text, ElementName=txtTitle}" Margin="10" Grid.Row="1" FontSize="14" Content="Set Active Window"/>
-        <TextBox Name="txtTitle" Text="{Binding TextTitle, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="3" Grid.Row="1" Grid.Column="1" FontSize="16"></TextBox>
-        <Button Margin="10" Grid.Row="2" FontSize="14" Content="Set Text "/>
-        <ListBox x:Name="KeysList" Grid.Row="2" Grid.Column="1">
-            
+        <Label Content="Select Action Arguments" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"></Label>
+        <Button Command="{Binding SetWindowByTitle}"  CommandParameter="{Binding Text, ElementName=txtTitle}" Margin="10" Grid.Row="1" FontSize="14" Content="Set Window"/>
+        <TextBox Name="txtTitle" Text="{Binding TextTitle, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="1" Grid.Column="1" FontSize="16"></TextBox>
+        <Button Command="{Binding SetText}"  CommandParameter="{Binding Text, ElementName=txtKeys}" Margin="10" Grid.Row="2" FontSize="14" Content="Set Text"/>
+        <TextBox Name="txtKeys" Text="{Binding TextKeys, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="2" Grid.Column="1" FontSize="16"></TextBox>
+        <Button Command="{Binding MouseClick}"  CommandParameter="{Binding Items, ElementName=ClickList}" Margin="10" Grid.Row="3" FontSize="14" Content="Mouse Click"/>
+        <!--<TextBox Name="txtKeys" Text="{Binding TextKeys, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="1" Grid.Column="1" FontSize="16"></TextBox>-->
+        <ListBox x:Name="ClickList" Margin="10" Grid.Row="3" Grid.Column="1">
         </ListBox>
+        <Button Command="{Binding MouseMove}"  CommandParameter="{Binding Text, ElementName=txtMOuseMOve}" Margin="10" Grid.Row="4" FontSize="14" Content="Mouse Move"/>
+        <TextBox Name="txtMouseMove" Text="{Binding TextMOuseMove, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="4" Grid.Column="1" FontSize="16"></TextBox>
+        
+        <Label Content="Current Actions Script" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="2"/>
+        <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" BorderThickness="2"/>
+        <TextBox Name="txtActionScript" Text="{Binding TextActions, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="1" Grid.Column="3" FontSize="16" Grid.RowSpan="3" Grid.ColumnSpan="2"></TextBox>
+        <Button Command="{Binding ClearActions}"  CommandParameter="{Binding Text, ElementName=txtActionScript}" Margin="10" Grid.Row="5" FontSize="14" Content="Clear Script" Grid.Column="3"/>
+        <Button Command="{Binding SendActions}"  CommandParameter="{Binding Text, ElementName=txtActionScript}" Margin="10" Grid.Row="4" FontSize="14" Content="Send Script" Grid.Column="3"/>
+
     </Grid>
 </Window>
