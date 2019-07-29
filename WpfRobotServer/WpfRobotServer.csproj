@@ -62,7 +62,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Model\RobotActions.cs" />
+    <Compile Include="Model\Actions.cs" />
+    <Compile Include="Model\RobotMethods.cs" />
     <Compile Include="ViewModel\ViewModelMain.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />

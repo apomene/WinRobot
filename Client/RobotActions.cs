@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Client
 {
-    internal class Actions:IDisposable
+    internal class RobotMethods:IDisposable
     {
         #region Imports For Set Window by Ttile
         [DllImportAttribute("User32.dll")]
@@ -21,7 +21,7 @@ namespace Client
         #endregion
         RobotActions.RobotClient proxy;
 
-        public Actions()
+        public RobotMethods()
         {
             //InstanceContext context = new InstanceContext(this);
             //proxy = new RobotClient(context);
