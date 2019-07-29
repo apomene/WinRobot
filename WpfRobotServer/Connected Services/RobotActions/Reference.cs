@@ -15,36 +15,18 @@ namespace WpfRobotServer.RobotActions {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RobotActions.IRobot", CallbackContract=typeof(WpfRobotServer.RobotActions.IRobotCallback))]
     public interface IRobot {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/GetWindow")]
-        void GetWindow(string windowTitle);
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/SendActionScript", ReplyAction="http://tempuri.org/IRobot/SendActionScriptResponse")]
+        string SendActionScript(string actionScript);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/GetWindow")]
-        System.Threading.Tasks.Task GetWindowAsync(string windowTitle);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/MoveMouse")]
-        void MoveMouse(int x, int y);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/MoveMouse")]
-        System.Threading.Tasks.Task MoveMouseAsync(int x, int y);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/MouseCLick")]
-        void MouseCLick();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/MouseCLick")]
-        System.Threading.Tasks.Task MouseCLickAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/SetText")]
-        void SetText(string text);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/SetText")]
-        System.Threading.Tasks.Task SetTextAsync(string text);
+        [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/SendActionScript", ReplyAction="http://tempuri.org/IRobot/SendActionScriptResponse")]
+        System.Threading.Tasks.Task<string> SendActionScriptAsync(string actionScript);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IRobotCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/CallBackGetWindow")]
-        void CallBackGetWindow(string actionScript);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/CallBackResult")]
+        void CallBackResult(bool actionResult);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -75,36 +57,12 @@ namespace WpfRobotServer.RobotActions {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void GetWindow(string windowTitle) {
-            base.Channel.GetWindow(windowTitle);
+        public string SendActionScript(string actionScript) {
+            return base.Channel.SendActionScript(actionScript);
         }
         
-        public System.Threading.Tasks.Task GetWindowAsync(string windowTitle) {
-            return base.Channel.GetWindowAsync(windowTitle);
-        }
-        
-        public void MoveMouse(int x, int y) {
-            base.Channel.MoveMouse(x, y);
-        }
-        
-        public System.Threading.Tasks.Task MoveMouseAsync(int x, int y) {
-            return base.Channel.MoveMouseAsync(x, y);
-        }
-        
-        public void MouseCLick() {
-            base.Channel.MouseCLick();
-        }
-        
-        public System.Threading.Tasks.Task MouseCLickAsync() {
-            return base.Channel.MouseCLickAsync();
-        }
-        
-        public void SetText(string text) {
-            base.Channel.SetText(text);
-        }
-        
-        public System.Threading.Tasks.Task SetTextAsync(string text) {
-            return base.Channel.SetTextAsync(text);
+        public System.Threading.Tasks.Task<string> SendActionScriptAsync(string actionScript) {
+            return base.Channel.SendActionScriptAsync(actionScript);
         }
     }
 }

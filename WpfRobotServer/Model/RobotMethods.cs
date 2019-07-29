@@ -8,19 +8,19 @@ using WpfRobotServer.RobotActions;
 
 namespace WpfRobotServer.Model
 {
-    internal class Actions:IRobotCallback
+    internal class RobotMethods : IRobotCallback
     {
         RobotClient proxy;
-        public void CallBackGetWindow(string str)
+        public void CallBackResult(bool result)
         {
-            Console.WriteLine(str);
+            Console.WriteLine(result);
         }
 
-        public void GetWindow(string Title)
+        public void SendActionScript(string script)
         {
             InstanceContext context = new InstanceContext(this);
             proxy = new RobotClient(context);
-            proxy.GetWindow(Title);
+            proxy.SendActionScript(script);
         }
     }
 }

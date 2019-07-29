@@ -42,8 +42,9 @@ namespace WpfRobotServer.ViewModel
             //The server sends the action or action script to the connected client. 
             // InstanceContext context = new InstanceContext(this);
             //proxy = new RobotClient(context);
-            Actions robotActions = new Actions();
-            robotActions.GetWindow("test.txt - Notepad");
+            RobotMethods robotActions = new RobotMethods();
+            string actionScript = $"{Actions.Select}:{TextTitle}";
+            robotActions.SendActionScript(actionScript);
 
         }
     }
