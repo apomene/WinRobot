@@ -72,46 +72,32 @@ namespace RobotService
         /// <param name="actionScript"></param>
         public static void ParseActionScript(string actionScript)
         {
-            try
+            foreach (var action in actionScript.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
             {
-                foreach (var action in actionScript.Split(new[] { Environment.NewLine },StringSplitOptions.None))
-                {
-                    ParseAction(action);
-                }
-            }
-            catch (Exception ex)
-            {
-                //TO DO log
+                ParseAction(action);
             }
         }
 
-        private static void  ParseAction(string action)
+        private static void ParseAction(string action)
         {
-            try
+            string actionName = action.Split(':')[0];
+            string actionArgs = action.Split(':')[1];
+            switch (actionName)
             {
-                string actionName = action.Split(':')[0];
-                string actionArgs = action.Split(':')[1];
-                switch (actionName)
-                {
-                    case (Actions.Select):
-                        ///Get Active Window By title
-                        GetWindow(actionArgs);
-                        break;
-                    case (Actions.Move):
-                        break;
-                    case (Actions.Click):
-                        MouseCLick();
-                        break;
-                    case (Actions.SendText):
-                        SetText(actionArgs);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                //TO DO log
+                case (Actions.Select):
+                    ///Get Active Window By title
+                    GetWindow(actionArgs);
+                    break;
+                case (Actions.Move):
+                    break;
+                case (Actions.Click):
+                    MouseCLick();
+                    break;
+                case (Actions.SendText):
+                    SetText(actionArgs);
+                    break;
+                default:
+                    break;
             }
         }
         #endregion
