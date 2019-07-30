@@ -88,7 +88,7 @@ namespace RobotService
                 Rectangle rect;
                 IntPtr hwnd = (IntPtr)FindWindow(null, GetActiveWindowTitle());
                 GetWindowRect(hwnd, out rect); //get cuurent active window Position
-                Cursor.Position = new System.Drawing.Point(rect.X - x, rect.Y - y); 
+                Cursor.Position = new System.Drawing.Point(rect.X + x, rect.Y + y); 
             }
             catch (Exception ex)
             {
