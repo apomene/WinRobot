@@ -45,10 +45,10 @@
         
         <Label Content="Current Actions Script" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="2"/>
         <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" BorderThickness="2"/>
-        <TextBox Name="txtActionScript" Text="{Binding TextActions, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="1" Grid.Column="3" FontSize="16" Grid.RowSpan="3" Grid.ColumnSpan="2"></TextBox>
+        <TextBox Name="txtActionScript" Text="{Binding TextActions, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="1" Grid.Column="3" FontSize="16" Grid.RowSpan="3" Grid.ColumnSpan="2" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Visible"></TextBox>
         <Button Command="{Binding ClearActions}"  CommandParameter="{Binding Text, ElementName=txtActionScript}" Margin="10" Grid.Row="5" FontSize="14" Content="Clear Script" Grid.Column="3"/>
         <Button Command="{Binding SendActions}"  CommandParameter="{Binding Text, ElementName=txtActionScript}" Margin="10" Grid.Row="4" FontSize="14" Content="Send Script" Grid.Column="3"/>
-        <TextBox Name="txtLog" Text="{Binding TextLog, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="4 " Grid.Column="4" FontSize="16" Grid.RowSpan="2" Grid.ColumnSpan="1"></TextBox>
+        <TextBox Name="txtLog" Text="{Binding TextLog, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="4 " Grid.Column="4" FontSize="16" Grid.RowSpan="2" Grid.ColumnSpan="1" VerticalScrollBarVisibility="Visible"></TextBox>
 
     </Grid>
 </Window>

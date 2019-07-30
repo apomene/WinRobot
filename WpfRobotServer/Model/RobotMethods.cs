@@ -40,5 +40,22 @@ namespace WpfRobotServer.Model
             }
           
         }
+
+        public async Task<bool> SendActionScriptAsync(string script)
+        {
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                proxy = new RobotClient(context);
+                await proxy.SendActionScriptAsync(script);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
+                return false;
+            }
+
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using WpfRobotServer.RobotActions;
 using System.ServiceModel;
 using WpfRobotServer.Model;
+using System.Threading.Tasks;
 
 namespace WpfRobotServer.ViewModel
 {
@@ -183,7 +184,7 @@ namespace WpfRobotServer.ViewModel
                 Logging.Logging.LogErrorToFile(ex.ToString());
             }        
         }
-        private void Send(object parameters)
+        private async void Send(object parameters)
         {         
             try
             {
@@ -192,7 +193,8 @@ namespace WpfRobotServer.ViewModel
                 var msg = $"Sending Action Script  to Client";
                 Logging.Logging.LogMsgToFile(msg);
                 TextLog += msg + Environment.NewLine;
-                if (robotActions.SendActionScript(TextActions))
+                var result = await robotActions.SendActionScriptAsync(TextActions);
+                if (result)
                 {
                     var msgSuccess = $"Action Script  succesfully executed";
                     Logging.Logging.LogMsgToFile(msgSuccess);
