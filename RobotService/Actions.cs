@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Drawing;
 
 namespace RobotService
 {
@@ -16,15 +17,19 @@ namespace RobotService
         const string Click = "mouse-click";
         const string SendText = "send-keys";
 
-        #region Imports For Set Window by Ttile
+        #region Imports For Invoking Various Actions
         [DllImportAttribute("User32.dll")]
         private static extern int FindWindow(String ClassName, String WindowName);
+        [DllImport("user32.dll")]
+        static extern IntPtr GetForegroundWindow();
         [DllImportAttribute("User32.dll")]
         private static extern IntPtr SetForegroundWindow(int hWnd);
-        #endregion
-        #region Imports for MOuse CLick
+        [DllImport("user32.dll")]
+        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);   
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
+        public static extern void  mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
+        [DllImport("user32.dll")]
+        private static extern int GetWindowRect(IntPtr hwnd, out Rectangle rect);
         //Mouse actions
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
@@ -50,9 +55,24 @@ namespace RobotService
                // callback.CallBackResult(false);
             }
         }
+        private static string GetActiveWindowTitle()
+        {
+            const int nChars = 256;
+            StringBuilder Buff = new StringBuilder(nChars);
+            IntPtr handle = GetForegroundWindow();
+
+            if (GetWindowText(handle, Buff, nChars) > 0)
+            {
+                return Buff.ToString();
+            }
+            return null;
+        }
         private static void MoveMouse(int x, int y)
         {
-            //to do
+            Rectangle rect; 
+            IntPtr hwnd = (IntPtr)FindWindow(null, GetActiveWindowTitle());
+            GetWindowRect(hwnd, out rect); //get cuurent active window Position
+            Cursor.Position = new System.Drawing.Point(rect.X - x, rect.Y-y); //<= fails without this
         }
         private static void MouseCLick()
         {
