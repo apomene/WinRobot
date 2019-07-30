@@ -5,6 +5,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Logging;
 
 namespace Client
 {
@@ -12,13 +13,9 @@ namespace Client
     {
         static void Main(string[] args)
         {
-           // Actions robot = new Actions();
             InitService();
-            //robot.GetWindow();
-            //robot.SetText("Hi");
-            //robot.SetText("{ENTER}");
-            //robot.SetText("All!!");
             Console.Read();
+            Logging.Logging.LogMsgToFile("Host Service Exited");
         }
 
         static ServiceHost  host = null;
@@ -27,16 +24,15 @@ namespace Client
             try
             {
                 host = new ServiceHost(typeof(Robot));
-
                 host.AddServiceEndpoint(typeof(IRobot),
                     new WSDualHttpBinding(), "");
                 host.Open();
-                //TO DO: Log
+                Logging.Logging.LogMsgToFile("Host Service Started");
             }
             catch (Exception ex)
             {
-                host.Abort();
-                //TO DO LOG
+                Logging.Logging.LogErrorToFile(ex.ToString());
+                host.Abort();             
             }
         }
     }
