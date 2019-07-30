@@ -36,43 +36,65 @@ namespace RobotService
         private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
         private const int MOUSEEVENTF_RIGHTUP = 0x10;
         #endregion
-
         private static void GetWindow(string windowTitle)
         {
-            //IActionCallBack callback = OperationContext.Current.GetCallbackChannel<IActionCallBack>();
-            //callback.CallBackFunction("Calling from Call Back");           
+            try
+            {
+                //IActionCallBack callback = OperationContext.Current.GetCallbackChannel<IActionCallBack>();
+                //callback.CallBackFunction("Calling from Call Back");           
 
-            //Find the window, using the CORRECT Window Title, for example, Notepad
-            int hWnd = FindWindow(null, windowTitle);
-            if (hWnd > 0) //If found
-            {
-                SetForegroundWindow(hWnd);
-               // callback.CallBackResult(true);
-                //return true;
+                //Find the window, using the CORRECT Window Title, for example, Notepad
+                int hWnd = FindWindow(null, windowTitle);
+                if (hWnd > 0) //If found
+                {
+                    SetForegroundWindow(hWnd);
+                    // callback.CallBackResult(true);
+                    //return true;
+                }
+                else //Not Found
+                {
+                    // callback.CallBackResult(false);
+                }
             }
-            else //Not Found
+            catch (Exception ex)
             {
-               // callback.CallBackResult(false);
+                Logging.Logging.LogErrorToFile(ex.ToString());
             }
+          
         }
         private static string GetActiveWindowTitle()
         {
-            const int nChars = 256;
-            StringBuilder Buff = new StringBuilder(nChars);
-            IntPtr handle = GetForegroundWindow();
-
-            if (GetWindowText(handle, Buff, nChars) > 0)
+            try
             {
-                return Buff.ToString();
+                const int nChars = 256;
+                StringBuilder Buff = new StringBuilder(nChars);
+                IntPtr handle = GetForegroundWindow();
+
+                if (GetWindowText(handle, Buff, nChars) > 0)
+                {
+                    return Buff.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
             }
             return null;
         }
         private static void MoveMouse(int x, int y)
         {
-            Rectangle rect; 
-            IntPtr hwnd = (IntPtr)FindWindow(null, GetActiveWindowTitle());
-            GetWindowRect(hwnd, out rect); //get cuurent active window Position
-            Cursor.Position = new System.Drawing.Point(rect.X - x, rect.Y-y); //<= fails without this
+            try
+            {
+                Rectangle rect;
+                IntPtr hwnd = (IntPtr)FindWindow(null, GetActiveWindowTitle());
+                GetWindowRect(hwnd, out rect); //get cuurent active window Position
+                Cursor.Position = new System.Drawing.Point(rect.X - x, rect.Y - y); 
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
+            }
+        
         }
         private static void MouseCLick()
         {
@@ -100,25 +122,36 @@ namespace RobotService
 
         private static void ParseAction(string action)
         {
-            string actionName = action.Split(':')[0];
-            string actionArgs = action.Split(':')[1];
-            switch (actionName)
+            try
             {
-                case (Actions.Select):
-                    ///Get Active Window By title
-                    GetWindow(actionArgs);
-                    break;
-                case (Actions.Move):
-                    break;
-                case (Actions.Click):
-                    MouseCLick();
-                    break;
-                case (Actions.SendText):
-                    SetText(actionArgs);
-                    break;
-                default:
-                    break;
+                string actionName = action.Split(':')[0];
+                string actionArgs = action.Split(':')[1];
+                switch (actionName)
+                {
+                    case (Actions.Select):
+                        ///Get Active Window By title
+                        GetWindow(actionArgs);
+                        break;
+                    case (Actions.Move):
+                        //x,y coordinates are comma separated:
+                        var coords = actionArgs.Split(',');
+                        MoveMouse(int.Parse(coords[0]), int.Parse(coords[1]));
+                        break;
+                    case (Actions.Click):
+                        MouseCLick();
+                        break;
+                    case (Actions.SendText):
+                        SetText(actionArgs);
+                        break;
+                    default:
+                        break;
+                }
             }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
+            }
+        
         }
         #endregion
     }

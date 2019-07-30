@@ -10,7 +10,7 @@
   <xs:element name="SendActionScriptResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="SendActionScriptResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SendActionScriptResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

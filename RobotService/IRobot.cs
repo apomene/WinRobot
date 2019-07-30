@@ -22,7 +22,7 @@ namespace RobotService
         //void MouseCLick();
 
         [OperationContract]
-        string SendActionScript( string actionScript);
+        bool SendActionScript( string actionScript);
     }
 
     public interface IActionCallBack
