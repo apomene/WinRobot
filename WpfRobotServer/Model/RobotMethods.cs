@@ -18,9 +18,17 @@ namespace WpfRobotServer.Model
 
         public void SendActionScript(string script)
         {
-            InstanceContext context = new InstanceContext(this);
-            proxy = new RobotClient(context);
-            proxy.SendActionScript(script);
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                proxy = new RobotClient(context);
+                proxy.SendActionScript(script);
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
+            }
+          
         }
     }
 }

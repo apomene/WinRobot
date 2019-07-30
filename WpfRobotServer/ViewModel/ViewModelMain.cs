@@ -99,26 +99,53 @@ namespace WpfRobotServer.ViewModel
             SendActions = new RelayCommand(Send);
         }
 
-        RobotClient proxy;
+        //RobotClient proxy;
         private void ActionWindow(object parameter)
         {
-            //The server sends the action or action script to the connected client. 
-            // InstanceContext context = new InstanceContext(this);
-            //proxy = new RobotClient(context);
-           // RobotMethods robotActions = new RobotMethods();
-            string actionScript = $"{Actions.Select}:{TextTitle}";
-           // robotActions.SendActionScript(actionScript);
-            this.TextActions += actionScript + Environment.NewLine;
+            try
+            {
+                //The server sends the action or action script to the connected client. 
+                // InstanceContext context = new InstanceContext(this);
+                //proxy = new RobotClient(context);
+                // RobotMethods robotActions = new RobotMethods();
+                string actionScript = $"{Actions.Select}:{TextTitle}";
+                // robotActions.SendActionScript(actionScript);
+                this.TextActions += actionScript + Environment.NewLine;
+                Logging.Logging.LogMsgToFile($"Action {Actions.Select}, Added to Action Script");
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
+            }
+         
         }
         private void ActionText(object parameter)
         {
-            string actionScript = $"{Actions.SendKeys}:{TextKeys}";
-            this.TextActions += actionScript + Environment.NewLine;
+            try
+            {
+                string actionScript = $"{Actions.SendKeys}:{TextKeys}";
+                this.TextActions += actionScript + Environment.NewLine;
+                Logging.Logging.LogMsgToFile($"Action {Actions.SendKeys}, Added to Action Script");
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
+            }
+
         }
         private void ActionClick(object parameter)
         {
-            string actionScript = $"{Actions.Click}:{TextKeys}";
-            this.TextActions += actionScript + Environment.NewLine;
+            try
+            {
+                string actionScript = $"{Actions.Click}:{TextKeys}";
+                this.TextActions += actionScript + Environment.NewLine;
+                Logging.Logging.LogMsgToFile($"Action {Actions.Click}, Added to Action Script");
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
+            }
+          
         }
         private void ActionMove(object parameter)
         {
@@ -127,13 +154,29 @@ namespace WpfRobotServer.ViewModel
         }
         private void Clear(object parameters)
         {
-            this.TextActions = "";
+            try
+            {
+                this.TextActions = "";
+                Logging.Logging.LogMsgToFile($"Action Script Cleared");
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
+            }        
         }
         private void Send(object parameters)
-        {
-            //The server sends the action or action script to the connected client.     
-             RobotMethods robotActions = new RobotMethods();
-             robotActions.SendActionScript(TextActions);        
+        {         
+            try
+            {
+                //The server sends the action or action script to the connected client.     
+                RobotMethods robotActions = new RobotMethods();
+                robotActions.SendActionScript(TextActions);
+                Logging.Logging.LogMsgToFile($"Action Script Send to Client");
+            }
+            catch (Exception ex)
+            {
+                Logging.Logging.LogErrorToFile(ex.ToString());
+            }
         }
     }
 }
