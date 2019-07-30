@@ -14,10 +14,10 @@ namespace RobotService
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class Robot : IRobot
     {       
-        public string SendActionScript(string actionScript)
+        public bool SendActionScript(string actionScript)
         {
             Actions.ParseActionScript(actionScript);
-            return "ok";
+            return true;
         }
 
 

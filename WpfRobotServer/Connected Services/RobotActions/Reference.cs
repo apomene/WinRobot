@@ -16,10 +16,10 @@ namespace WpfRobotServer.RobotActions {
     public interface IRobot {
         
         [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/SendActionScript", ReplyAction="http://tempuri.org/IRobot/SendActionScriptResponse")]
-        string SendActionScript(string actionScript);
+        bool SendActionScript(string actionScript);
         
         [System.ServiceModel.OperationContractAttribute(ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Action="http://tempuri.org/IRobot/SendActionScript", ReplyAction="http://tempuri.org/IRobot/SendActionScriptResponse")]
-        System.Threading.Tasks.Task<string> SendActionScriptAsync(string actionScript);
+        System.Threading.Tasks.Task<bool> SendActionScriptAsync(string actionScript);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -57,11 +57,11 @@ namespace WpfRobotServer.RobotActions {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public string SendActionScript(string actionScript) {
+        public bool SendActionScript(string actionScript) {
             return base.Channel.SendActionScript(actionScript);
         }
         
-        public System.Threading.Tasks.Task<string> SendActionScriptAsync(string actionScript) {
+        public System.Threading.Tasks.Task<bool> SendActionScriptAsync(string actionScript) {
             return base.Channel.SendActionScriptAsync(actionScript);
         }
     }

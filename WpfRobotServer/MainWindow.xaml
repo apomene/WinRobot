@@ -41,7 +41,7 @@
         <ListBox x:Name="ClickList" Margin="10" Grid.Row="3" Grid.Column="1">
         </ListBox>
         <Button Command="{Binding MouseMove}"  CommandParameter="{Binding Text, ElementName=txtMOuseMOve}" Margin="10" Grid.Row="4" FontSize="14" Content="Mouse Move"/>
-        <TextBox Name="txtMouseMove" Text="{Binding TextMOuseMove, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="4" Grid.Column="1" FontSize="16"></TextBox>
+        <TextBox Name="txtMouseMove" Text="{Binding TextMouseMove, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="4" Grid.Column="1" FontSize="16"></TextBox>
         
         <Label Content="Current Actions Script" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="2"/>
         <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" BorderThickness="2"/>
