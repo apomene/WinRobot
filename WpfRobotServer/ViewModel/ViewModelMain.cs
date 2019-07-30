@@ -79,6 +79,23 @@ namespace WpfRobotServer.ViewModel
                 }
             }
         }
+
+        string _textLog;
+        public string TextLog
+        {
+            get
+            {
+                return _textLog;
+            }
+            set
+            {
+                if (_textLog != value)
+                {
+                    _textLog = value;
+                    RaisePropertyChanged("TextLog");
+                }
+            }
+        }
         #endregion
 
         #region Commands - Button Clicks
@@ -157,7 +174,9 @@ namespace WpfRobotServer.ViewModel
             try
             {
                 this.TextActions = "";
-                Logging.Logging.LogMsgToFile($"Action Script Cleared");
+                var msg = $"Action Script Cleared";
+                Logging.Logging.LogMsgToFile(msg);
+                TextLog += msg + Environment.NewLine;
             }
             catch (Exception ex)
             {
@@ -170,8 +189,21 @@ namespace WpfRobotServer.ViewModel
             {
                 //The server sends the action or action script to the connected client.     
                 RobotMethods robotActions = new RobotMethods();
-                robotActions.SendActionScript(TextActions);
-                Logging.Logging.LogMsgToFile($"Action Script Send to Client");
+                var msg = $"Sending Action Script  to Client";
+                Logging.Logging.LogMsgToFile(msg);
+                TextLog += msg + Environment.NewLine;
+                if (robotActions.SendActionScript(TextActions))
+                {
+                    var msgSuccess = $"Action Script  succesfully executed";
+                    Logging.Logging.LogMsgToFile(msgSuccess);
+                    TextLog += msgSuccess + Environment.NewLine;
+                }
+                else
+                {
+                    var msgFail= $"Client  failure on executing script";
+                    Logging.Logging.LogMsgToFile(msgFail);
+                    TextLog += msgFail + Environment.NewLine;
+                }
             }
             catch (Exception ex)
             {
