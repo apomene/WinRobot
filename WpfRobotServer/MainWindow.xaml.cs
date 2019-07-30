@@ -23,7 +23,6 @@ namespace WpfRobotServer
     /// </summary>
     public partial class MainWindow : Window
     {
-        ServiceHost host = null;
         public MainWindow()
         {
             InitializeComponent();
