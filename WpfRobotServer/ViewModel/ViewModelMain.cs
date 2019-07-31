@@ -141,7 +141,6 @@ namespace WpfRobotServer.ViewModel
             MouseActions.Add(ScriptModel.clickTypeD);
         }
 
-        //RobotClient proxy;
         private void ActionWindow(object parameter)
         {
             try
@@ -227,6 +226,7 @@ namespace WpfRobotServer.ViewModel
                 TextLog += msg + Environment.NewLine;
                 await Task.Delay(5000); //For Test Reasons.  REMOVE on FINAL RELEASE!!
                 var result = await robotActions.SendActionScriptAsync(TextActions);
+                //TO DO: Implement a better logic for deciding for the success or failure of the action script
                 if (result)
                 {
                     var msgSuccess = $"Action Script  succesfully executed";
