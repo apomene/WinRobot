@@ -134,6 +134,7 @@ namespace WpfRobotServer.ViewModel
             MouseMove = new RelayCommand(ActionMove);
             ClearActions = new RelayCommand(Clear);
             SendActions = new RelayCommand(Send);
+            MouseActions = new ObservableCollection<string>();
             MouseActions.Add("Left Click");
             MouseActions.Add("Right CLick");
             MouseActions.Add("Double CLick");
