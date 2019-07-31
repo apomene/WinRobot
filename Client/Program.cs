@@ -14,7 +14,7 @@ namespace Client
         {
             InitService();
             Console.Read();
-            Logging.Logging.LogMsgToFile("Host Service Exited");
+            Logging.LogMsgToFile("Host Service Exited");
         }
 
         static ServiceHost  host = null;
@@ -26,11 +26,11 @@ namespace Client
                 host.AddServiceEndpoint(typeof(IRobot),
                     new WSDualHttpBinding(), "");
                 host.Open();
-                Logging.Logging.LogMsgToFile("Host Service Started");
+                Logging.LogMsgToFile("Host Service Started");
             }
             catch (Exception ex)
             {
-                Logging.Logging.LogErrorToFile(ex.ToString());
+                Logging.LogErrorToFile(ex.ToString());
                 host.Abort();             
             }
         }

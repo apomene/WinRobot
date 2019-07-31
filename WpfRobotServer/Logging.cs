@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NLog;
 
 
-namespace Logging
+namespace WpfRobotServer
 {
     public static class Logging
     {

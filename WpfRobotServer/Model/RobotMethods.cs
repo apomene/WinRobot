@@ -12,8 +12,8 @@ namespace WpfRobotServer.Model
     internal class RobotMethods : IRobotCallback
     {
         RobotClient proxy;
-        string timeOut = ConfigurationManager.AppSettings["ScriptExecTimeout"];
-        int _timeOut = 10 * 1000; //set default value in case parse fails
+        readonly string  timeOut = ConfigurationManager.AppSettings["ScriptExecTimeout"];
+        readonly int _timeOut = 10 * 1000; //set default value in case parse fails
         public RobotMethods()
         {
             int.TryParse(timeOut,out _timeOut);
@@ -35,7 +35,7 @@ namespace WpfRobotServer.Model
             }
             catch (Exception ex)
             {
-                Logging.Logging.LogErrorToFile(ex.ToString());
+                Logging.LogErrorToFile(ex.ToString());
                 return false;
             }
           
@@ -52,7 +52,7 @@ namespace WpfRobotServer.Model
             }
             catch (Exception ex)
             {
-                Logging.Logging.LogErrorToFile(ex.ToString());
+                Logging.LogErrorToFile(ex.ToString());
                 return false;
             }
 

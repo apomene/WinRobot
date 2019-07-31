@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Drawing;
 
+
 namespace RobotService
 {
     internal static class Actions
@@ -58,7 +59,7 @@ namespace RobotService
             }
             catch (Exception ex)
             {
-                Logging.Logging.LogErrorToFile(ex.ToString());
+                Logging.LogErrorToFile(ex.ToString());
             }
           
         }
@@ -77,7 +78,7 @@ namespace RobotService
             }
             catch (Exception ex)
             {
-                Logging.Logging.LogErrorToFile(ex.ToString());
+                Logging.LogErrorToFile(ex.ToString());
             }
             return null;
         }
@@ -92,7 +93,7 @@ namespace RobotService
             }
             catch (Exception ex)
             {
-                Logging.Logging.LogErrorToFile(ex.ToString());
+                Logging.LogErrorToFile(ex.ToString());
             }
         
         }
@@ -149,7 +150,7 @@ namespace RobotService
             }
             catch (Exception ex)
             {
-                Logging.Logging.LogErrorToFile(ex.ToString());
+                Logging.LogErrorToFile(ex.ToString());
             }
         
         }
