@@ -7,17 +7,14 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Drawing;
+using ActionsModel;
 
 
 namespace RobotService
 {
-    internal static class Actions
+    internal  class Actions:IActions
     {
-        const string Select = "select-window";
-        const string Move = "mouse-move";
-        const string Click = "mouse-click";
-        const string SendText = "send-keys";
-
+       
         #region Imports For Invoking Various Actions
         [DllImportAttribute("User32.dll")]
         private static extern int FindWindow(String ClassName, String WindowName);
@@ -37,33 +34,8 @@ namespace RobotService
         private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
         private const int MOUSEEVENTF_RIGHTUP = 0x10;
         #endregion
-        private static void GetWindow(string windowTitle)
-        {
-            try
-            {
-                //IActionCallBack callback = OperationContext.Current.GetCallbackChannel<IActionCallBack>();
-                //callback.CallBackFunction("Calling from Call Back");           
 
-                //Find the window, using the CORRECT Window Title, for example, Notepad
-                int hWnd = FindWindow(null, windowTitle);
-                if (hWnd > 0) //If found
-                {
-                    SetForegroundWindow(hWnd);
-                    // callback.CallBackResult(true);
-                    //return true;
-                }
-                else //Not Found
-                {
-                    // callback.CallBackResult(false);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logging.LogErrorToFile(ex.ToString());
-            }
-          
-        }
-        private static string GetActiveWindowTitle()
+        private string GetActiveWindowTitle()
         {
             try
             {
@@ -82,7 +54,32 @@ namespace RobotService
             }
             return null;
         }
-        private static void MoveMouse(int x, int y)
+
+        #region External Assembly Model Implementation
+        public  void GetWindow(string windowTitle)
+        {
+            try
+            {
+              
+                //Find the window, using the CORRECT Window Title
+                int hWnd = FindWindow(null, windowTitle);
+                if (hWnd > 0) //If found
+                {
+                    SetForegroundWindow(hWnd);
+                    // callback.CallBackResult(true);
+                    //return true;
+                }
+                else //Not Found
+                {
+                    // callback.CallBackResult(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.LogErrorToFile(ex.ToString());
+            }         
+        }      
+        public  void MoveMouse(int x, int y)
         {
             try
             {
@@ -97,7 +94,7 @@ namespace RobotService
             }
         
         }
-        private static void MouseCLick(string clickType)
+        public  void MouseCLick(string clickType)
         {
             try
             {
@@ -105,13 +102,13 @@ namespace RobotService
                 uint Y = (uint)Cursor.Position.Y;
                 switch (clickType)
                 {
-                    case ("Left Click"):
+                    case (ScriptModel.clickTypeL):
                         mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
                         break;
-                    case ("Right Click"):
+                    case (ScriptModel.clickTypeR):
                         mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
                         break;
-                    case ("Double CLick"):
+                    case (ScriptModel.clickTypeD):
                         mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
                         //Thread.Sleep(50);
                         mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
@@ -125,17 +122,14 @@ namespace RobotService
       
           
         }
-        private static void SetText(string text)
+        public  void SetText(string text)
         {
             SendKeys.SendWait(text);
         }
+        #endregion
 
-        #region Parse action Script And produce Actions
-        /// <summary>
-        /// Each Separate Action in 1 line and can be one of the 4 const strings, : separated by the action args
-        /// </summary>
-        /// <param name="actionScript"></param>
-        public static void ParseActionScript(string actionScript)
+        #region Parse action Script And produce Actions       
+        public void ParseActionScript(string actionScript)
         {
             foreach (var action in actionScript.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
             {
@@ -143,27 +137,28 @@ namespace RobotService
             }
         }
 
-        private static void ParseAction(string action)
+        private  void ParseAction(string action)
         {
             try
             {
-                string actionName = action.Split(':')[0];
-                string actionArgs = action.Split(':')[1];
+                
+                string actionName = action.Split(ScriptModel.delimeter)[0];
+                string actionArgs = action.Split(ScriptModel.delimeter)[1];
+                /// TO DO: Avoid Switch statemnet - USE STRATEGY Pattern
                 switch (actionName)
                 {
-                    case (Actions.Select):
+                    case (ScriptModel.Select):
                         ///Get Active Window By title
                         GetWindow(actionArgs);
                         break;
-                    case (Actions.Move):
-                        //x,y coordinates are comma separated:
-                        var coords = actionArgs.Split(',');
+                    case (ScriptModel.Move):                      
+                        var coords = actionArgs.Split(ScriptModel.coordsDelim);
                         MoveMouse(int.Parse(coords[0]), int.Parse(coords[1]));
                         break;
-                    case (Actions.Click):
+                    case (ScriptModel.Click):
                         MouseCLick(actionArgs);
                         break;
-                    case (Actions.SendText):
+                    case (ScriptModel.SendText):
                         SetText(actionArgs);
                         break;
                     default:
@@ -177,5 +172,6 @@ namespace RobotService
         
         }
         #endregion
+       
     }
 }

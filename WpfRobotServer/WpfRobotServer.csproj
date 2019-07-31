@@ -69,7 +69,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Logging.cs" />
-    <Compile Include="Model\Actions.cs" />
     <Compile Include="Model\RobotMethods.cs" />
     <Compile Include="ViewModel\ViewModelMain.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
@@ -133,6 +132,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ActionsModel\ActionsModel.csproj">
+      <Project>{158f25c5-d44b-4ebe-bc63-23293c4cad04}</Project>
+      <Name>ActionsModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RobotService\RobotService.csproj">
       <Project>{e3b366d0-59cb-47af-a0e1-4df0eab1ea63}</Project>
       <Name>RobotService</Name>

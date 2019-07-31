@@ -16,22 +16,9 @@ namespace RobotService
     {       
         public bool SendActionScript(string actionScript)
         {
-            Actions.ParseActionScript(actionScript);
+            Actions robot = new Actions();
+            robot.ParseActionScript(actionScript);
             return true;
-        }
-
-
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
+        }  
     }
 }

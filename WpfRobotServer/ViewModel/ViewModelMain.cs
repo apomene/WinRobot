@@ -8,6 +8,7 @@ using WpfRobotServer.RobotActions;
 using System.ServiceModel;
 using WpfRobotServer.Model;
 using System.Threading.Tasks;
+using ActionsModel;
 
 namespace WpfRobotServer.ViewModel
 {
@@ -135,9 +136,9 @@ namespace WpfRobotServer.ViewModel
             ClearActions = new RelayCommand(Clear);
             SendActions = new RelayCommand(Send);
             MouseActions = new ObservableCollection<string>();
-            MouseActions.Add("Left Click");
-            MouseActions.Add("Right Click");
-            MouseActions.Add("Double CLick");
+            MouseActions.Add(ScriptModel.clickTypeL);
+            MouseActions.Add(ScriptModel.clickTypeR);
+            MouseActions.Add(ScriptModel.clickTypeD);
         }
 
         //RobotClient proxy;
@@ -149,10 +150,10 @@ namespace WpfRobotServer.ViewModel
                 // InstanceContext context = new InstanceContext(this);
                 //proxy = new RobotClient(context);
                 // RobotMethods robotActions = new RobotMethods();
-                string actionScript = $"{Actions.Select}:{TextTitle}";
+                string actionScript = $"{ScriptModel.Select}:{TextTitle}";
                 // robotActions.SendActionScript(actionScript);
                 this.TextActions += actionScript + Environment.NewLine;
-                Logging.LogMsgToFile($"Action {Actions.Select}, Added to Action Script");
+                Logging.LogMsgToFile($"Action {ScriptModel.Select}, Added to Action Script");
             }
             catch (Exception ex)
             {
@@ -164,9 +165,9 @@ namespace WpfRobotServer.ViewModel
         {
             try
             {
-                string actionScript = $"{Actions.SendKeys}:{TextKeys}";
+                string actionScript = $"{ScriptModel.SendText}:{TextKeys}";
                 this.TextActions += actionScript + Environment.NewLine;
-                Logging.LogMsgToFile($"Action {Actions.SendKeys}, Added to Action Script");
+                Logging.LogMsgToFile($"Action {actionScript}, Added to Action Script");
             }
             catch (Exception ex)
             {
@@ -178,9 +179,9 @@ namespace WpfRobotServer.ViewModel
         {
             try
             {
-                string actionScript = $"{Actions.Click}:{MouseClicks}";
+                string actionScript = $"{ScriptModel.Click}:{MouseClicks}";
                 this.TextActions += actionScript + Environment.NewLine;
-                Logging.LogMsgToFile($"Action {Actions.Click}, Added to Action Script");
+                Logging.LogMsgToFile($"Action {actionScript}, Added to Action Script");
             }
             catch (Exception ex)
             {
@@ -190,8 +191,16 @@ namespace WpfRobotServer.ViewModel
         }
         private void ActionMove(object parameter)
         {
-            string actionScript = $"{Actions.Move}:{TextMouseMove}";
-            this.TextActions += actionScript + Environment.NewLine;
+            try
+            {
+                string actionScript = $"{ScriptModel.Move}:{TextMouseMove}";
+                this.TextActions += actionScript + Environment.NewLine;
+                Logging.LogMsgToFile($"Action {actionScript}, Added to Action Script");
+            }
+            catch (Exception ex)
+            {
+                Logging.LogErrorToFile(ex.ToString());
+            }
         }
         private void Clear(object parameters)
         {
