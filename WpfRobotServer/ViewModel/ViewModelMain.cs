@@ -136,7 +136,7 @@ namespace WpfRobotServer.ViewModel
             SendActions = new RelayCommand(Send);
             MouseActions = new ObservableCollection<string>();
             MouseActions.Add("Left Click");
-            MouseActions.Add("Right CLick");
+            MouseActions.Add("Right Click");
             MouseActions.Add("Double CLick");
         }
 
@@ -216,6 +216,7 @@ namespace WpfRobotServer.ViewModel
                 var msg = $"Sending Action Script  to Client";
                 Logging.LogMsgToFile(msg);
                 TextLog += msg + Environment.NewLine;
+                await Task.Delay(5000); //For Test Reasons.  REMOVE on FINAL RELEASE!!
                 var result = await robotActions.SendActionScriptAsync(TextActions);
                 if (result)
                 {
