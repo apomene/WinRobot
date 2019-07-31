@@ -38,8 +38,7 @@
         <TextBox Name="txtKeys" Text="{Binding TextKeys, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="2" Grid.Column="1" FontSize="16"></TextBox>
         <Button Command="{Binding MouseClick}"  CommandParameter="{Binding Items, ElementName=ClickList}" Margin="10" Grid.Row="3" FontSize="14" Content="Mouse Click"/>
         <!--<TextBox Name="txtKeys" Text="{Binding TextKeys, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="1" Grid.Column="1" FontSize="16"></TextBox>-->
-        <ListBox x:Name="ClickList" Margin="10" Grid.Row="3" Grid.Column="1">
-        </ListBox>
+        <ListBox x:Name="ClickList" Margin="10" Grid.Row="3" Grid.Column="1" SelectedItem="{Binding Path=MouseClicks, Mode=TwoWay}"  ItemsSource="{Binding MouseClicks}"/>
         <Button Command="{Binding MouseMove}"  CommandParameter="{Binding Text, ElementName=txtMOuseMOve}" Margin="10" Grid.Row="4" FontSize="14" Content="Mouse Move"/>
         <TextBox Name="txtMouseMove" Text="{Binding TextMouseMove, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="4" Grid.Column="1" FontSize="16"></TextBox>
         
