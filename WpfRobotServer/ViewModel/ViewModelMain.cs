@@ -97,6 +97,25 @@ namespace WpfRobotServer.ViewModel
                 }
             }
         }
+
+        public ObservableCollection<string> MouseActions { get; set; }
+        string _clcik;
+        public string MouseClicks
+        {
+            get
+            {
+                return _clcik;
+            }
+            set
+            {
+                if (_clcik != value)
+                {
+                    _clcik = value;
+                    RaisePropertyChanged("MouseClicks");
+                }
+            }
+        }
+
         #endregion
 
         #region Commands - Button Clicks
@@ -115,6 +134,9 @@ namespace WpfRobotServer.ViewModel
             MouseMove = new RelayCommand(ActionMove);
             ClearActions = new RelayCommand(Clear);
             SendActions = new RelayCommand(Send);
+            MouseActions.Add("Left Click");
+            MouseActions.Add("Right CLick");
+            MouseActions.Add("Double CLick");
         }
 
         //RobotClient proxy;
@@ -155,7 +177,7 @@ namespace WpfRobotServer.ViewModel
         {
             try
             {
-                string actionScript = $"{Actions.Click}:{TextKeys}";
+                string actionScript = $"{Actions.Click}:{MouseClicks}";
                 this.TextActions += actionScript + Environment.NewLine;
                 Logging.LogMsgToFile($"Action {Actions.Click}, Added to Action Script");
             }

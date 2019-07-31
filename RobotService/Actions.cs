@@ -97,11 +97,33 @@ namespace RobotService
             }
         
         }
-        private static void MouseCLick()
+        private static void MouseCLick(string clickType)
         {
-            uint X = (uint)Cursor.Position.X;
-            uint Y = (uint)Cursor.Position.Y;
-            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+            try
+            {
+                uint X = (uint)Cursor.Position.X;
+                uint Y = (uint)Cursor.Position.Y;
+                switch (clickType)
+                {
+                    case ("Left Click"):
+                        mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+                        break;
+                    case ("Right Click"):
+                        mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
+                        break;
+                    case ("Double CLick"):
+                        mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+                        //Thread.Sleep(50);
+                        mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.LogErrorToFile(ex.ToString());
+            }
+      
+          
         }
         private static void SetText(string text)
         {
@@ -139,7 +161,7 @@ namespace RobotService
                         MoveMouse(int.Parse(coords[0]), int.Parse(coords[1]));
                         break;
                     case (Actions.Click):
-                        MouseCLick();
+                        MouseCLick(actionArgs);
                         break;
                     case (Actions.SendText):
                         SetText(actionArgs);
