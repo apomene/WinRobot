@@ -21,7 +21,7 @@ namespace WpfRobotServer.Model
 
         public void CallBackResult(bool result)
         {
-            Console.WriteLine(result);
+           // TO DO reurn action resut from client
         }
         
         public bool SendActionScript(string script)

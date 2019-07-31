@@ -118,9 +118,7 @@ namespace RobotService
             catch (Exception ex)
             {
                 Logging.LogErrorToFile(ex.ToString());
-            }
-      
-          
+            }                
         }
         public  void SetText(string text)
         {
@@ -131,6 +129,7 @@ namespace RobotService
         #region Parse action Script And produce Actions       
         public void ParseActionScript(string actionScript)
         {
+            ///We assume that each action is in separate line
             foreach (var action in actionScript.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
             {
                 ParseAction(action);
@@ -168,8 +167,7 @@ namespace RobotService
             catch (Exception ex)
             {
                 Logging.LogErrorToFile(ex.ToString());
-            }
-        
+            }      
         }
         #endregion
        

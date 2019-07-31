@@ -13,8 +13,7 @@ namespace ActionsModel
 
         void MouseCLick(string clickType);
 
-        void SetText(string text);
-      
+        void SetText(string text);      
     }
 
 }

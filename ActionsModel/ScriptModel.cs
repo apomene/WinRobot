@@ -12,7 +12,6 @@ namespace ActionsModel
         public const char delimeter = ':'; // each Action method is separated by this delimeter, from action Arguments
         public const char coordsDelim = ',';  //x,y coordinates are comma separated:
 
-
         #region Mouse Click Types
         public const string clickTypeL = "Left Click";
         public const string clickTypeR = "Right Click";
