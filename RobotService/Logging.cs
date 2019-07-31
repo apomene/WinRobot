@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NLog;
 
 
-namespace Logging
+namespace RobotService
 {
     public static class Logging
     {
