@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotService", "RobotServic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{EAE071E0-AFB5-4368-B13F-8032A11A0D59}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionsModel", "ActionsModel\ActionsModel.csproj", "{158F25C5-D44B-4EBE-BC63-23293C4CAD04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EAE071E0-AFB5-4368-B13F-8032A11A0D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAE071E0-AFB5-4368-B13F-8032A11A0D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAE071E0-AFB5-4368-B13F-8032A11A0D59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{158F25C5-D44B-4EBE-BC63-23293C4CAD04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{158F25C5-D44B-4EBE-BC63-23293C4CAD04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{158F25C5-D44B-4EBE-BC63-23293C4CAD04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{158F25C5-D44B-4EBE-BC63-23293C4CAD04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
