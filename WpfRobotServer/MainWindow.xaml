@@ -47,6 +47,5 @@
         <Button Command="{Binding ClearActions}"  CommandParameter="{Binding Text, ElementName=txtActionScript}" Margin="10" Grid.Row="5" FontSize="14" Content="Clear Script" Grid.Column="3"/>
         <Button Command="{Binding SendActions}"  CommandParameter="{Binding Text, ElementName=txtActionScript}" Margin="10" Grid.Row="4" FontSize="14" Content="Send Script" Grid.Column="3"/>
         <TextBox Name="txtLog" Text="{Binding TextLog, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Margin="10" Grid.Row="4 " Grid.Column="4" FontSize="16" Grid.RowSpan="2" Grid.ColumnSpan="1" VerticalScrollBarVisibility="Visible"></TextBox>
-
     </Grid>
 </Window>
