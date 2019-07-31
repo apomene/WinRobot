@@ -13,7 +13,7 @@ namespace WpfRobotServer.Model
     {
         RobotClient proxy;
         readonly string  timeOut = ConfigurationManager.AppSettings["ScriptExecTimeout"];
-        readonly int _timeOut = 10 * 1000; //set default value in case parse fails
+        int _timeOut = 10 * 1000; //set default value in case parse fails
         public RobotMethods()
         {
             int.TryParse(timeOut,out _timeOut);
