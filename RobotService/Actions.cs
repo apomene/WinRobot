@@ -59,8 +59,7 @@ namespace RobotService
         public  void GetWindow(string windowTitle)
         {
             try
-            {
-              
+            {            
                 //Find the window, using the CORRECT Window Title
                 int hWnd = FindWindow(null, windowTitle);
                 if (hWnd > 0) //If found
@@ -91,8 +90,7 @@ namespace RobotService
             catch (Exception ex)
             {
                 Logging.LogErrorToFile(ex.ToString());
-            }
-        
+            }       
         }
         public  void MouseCLick(string clickType)
         {
@@ -139,8 +137,7 @@ namespace RobotService
         private  void ParseAction(string action)
         {
             try
-            {
-                
+            {               
                 string actionName = action.Split(ScriptModel.delimeter)[0];
                 string actionArgs = action.Split(ScriptModel.delimeter)[1];
                 /// TO DO: Avoid Switch statemnet - USE STRATEGY Pattern

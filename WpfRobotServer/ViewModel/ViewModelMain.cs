@@ -127,6 +127,7 @@ namespace WpfRobotServer.ViewModel
         public RelayCommand ClearActions { get; set; }
         public RelayCommand SendActions { get; set; }
         #endregion
+        private string _msgBoxWarning = "Action Arguments are empty. Please fill them before Adding Action to script";
         public ViewModelMain()
         {
             SetWindowByTitle = new RelayCommand(ActionWindow);
@@ -144,13 +145,13 @@ namespace WpfRobotServer.ViewModel
         private void ActionWindow(object parameter)
         {
             try
-            {
-                //The server sends the action or action script to the connected client. 
-                // InstanceContext context = new InstanceContext(this);
-                //proxy = new RobotClient(context);
-                // RobotMethods robotActions = new RobotMethods();
+            {    
+                if (string.IsNullOrEmpty(TextTitle))
+                {
+                    System.Windows.MessageBox.Show(_msgBoxWarning);
+                    return;
+                }
                 string actionScript = $"{ScriptModel.Select}:{TextTitle}";
-                // robotActions.SendActionScript(actionScript);
                 this.TextActions += actionScript + Environment.NewLine;
                 Logging.LogMsgToFile($"Action {ScriptModel.Select}, Added to Action Script");
             }
@@ -164,6 +165,11 @@ namespace WpfRobotServer.ViewModel
         {
             try
             {
+                if (string.IsNullOrEmpty(TextKeys))
+                {
+                    System.Windows.MessageBox.Show(_msgBoxWarning);
+                    return;
+                }
                 string actionScript = $"{ScriptModel.SendText}:{TextKeys}";
                 this.TextActions += actionScript + Environment.NewLine;
                 Logging.LogMsgToFile($"Action {actionScript}, Added to Action Script");
@@ -178,6 +184,11 @@ namespace WpfRobotServer.ViewModel
         {
             try
             {
+                if (string.IsNullOrEmpty(MouseClicks))
+                {
+                    System.Windows.MessageBox.Show(_msgBoxWarning);
+                    return;
+                }
                 string actionScript = $"{ScriptModel.Click}:{MouseClicks}";
                 this.TextActions += actionScript + Environment.NewLine;
                 Logging.LogMsgToFile($"Action {actionScript}, Added to Action Script");
@@ -192,6 +203,11 @@ namespace WpfRobotServer.ViewModel
         {
             try
             {
+                if (string.IsNullOrEmpty(TextMouseMove))
+                {
+                    System.Windows.MessageBox.Show(_msgBoxWarning);
+                    return;
+                }
                 string actionScript = $"{ScriptModel.Move}:{TextMouseMove}";
                 this.TextActions += actionScript + Environment.NewLine;
                 Logging.LogMsgToFile($"Action {actionScript}, Added to Action Script");
@@ -218,10 +234,15 @@ namespace WpfRobotServer.ViewModel
         private async void Send(object parameters)
         {         
             try
-            {
-                //The server sends the action or action script to the connected client.     
+            {    //TO DO: Validate Action Script before sending, based on ActionsModel Assembly
+                if (string.IsNullOrEmpty(TextActions))
+                {
+                    System.Windows.MessageBox.Show("Invalid Action Script");
+                    return;
+                }
+                //The server sends the  action script to the connected client.     
                 RobotMethods robotActions = new RobotMethods();
-                var msg = $"Sending Action Script  to Client";
+                var msg = $"Sending Action Script to Client";
                 Logging.LogMsgToFile(msg);
                 TextLog += msg + Environment.NewLine;
                 await Task.Delay(5000); //For Test Reasons.  REMOVE on FINAL RELEASE!!
@@ -229,13 +250,13 @@ namespace WpfRobotServer.ViewModel
                 //TO DO: Implement a better logic for deciding for the success or failure of the action script
                 if (result)
                 {
-                    var msgSuccess = $"Action Script  succesfully executed";
+                    var msgSuccess = $"Action Script succesfully executed";
                     Logging.LogMsgToFile(msgSuccess);
                     TextLog += msgSuccess + Environment.NewLine;
                 }
                 else
                 {
-                    var msgFail= $"Client  failure on executing script";
+                    var msgFail= $"Client failure on executing script";
                     Logging.LogMsgToFile(msgFail);
                     TextLog += msgFail + Environment.NewLine;
                 }

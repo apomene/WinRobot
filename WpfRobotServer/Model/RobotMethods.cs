@@ -21,7 +21,7 @@ namespace WpfRobotServer.Model
 
         public void CallBackResult(bool result)
         {
-           // TO DO reurn action resut from client
+           // TO DO: return action resut from client
         }
         
         public bool SendActionScript(string script)
@@ -37,8 +37,7 @@ namespace WpfRobotServer.Model
             {
                 Logging.LogErrorToFile(ex.ToString());
                 return false;
-            }
-          
+            }          
         }
 
         public async Task<bool> SendActionScriptAsync(string script)
@@ -55,7 +54,6 @@ namespace WpfRobotServer.Model
                 Logging.LogErrorToFile(ex.ToString());
                 return false;
             }
-
         }
     }
 }
