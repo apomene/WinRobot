@@ -68,9 +68,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\RobotService\RobotService.csproj">
       <Project>{e3b366d0-59cb-47af-a0e1-4df0eab1ea63}</Project>
       <Name>RobotService</Name>

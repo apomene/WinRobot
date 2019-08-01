@@ -26,13 +26,6 @@ namespace WpfRobotServer
         public MainWindow()
         {
             InitializeComponent();
-            //InitControls();
-        }
-
-        private void InitControls()
-        {
-            //ClickList.ItemsSource = new List<string>() { "Left Click", "Right CLick", "Double CLick" };
-        }
-      
+        }      
     }
 }

@@ -20,8 +20,11 @@ namespace Client
             int.TryParse(sendTimeOut, out _sendTimeOut);
             int.TryParse(receiveTimeOut, out _receivedTimeOut);
             InitService();
+            string InitMsg = "Client Service Started";
+            Console.WriteLine(InitMsg);
+            Logging.LogMsgToFile(InitMsg);
             Console.Read();
-            Logging.LogMsgToFile("Host Service Exited");
+            Logging.LogMsgToFile("Client Service Exited");
         }
 
         static ServiceHost  host = null;
@@ -36,8 +39,7 @@ namespace Client
                 binding.SendTimeout = new TimeSpan(0, 0, _sendTimeOut);
                 binding.ReceiveTimeout = new TimeSpan(0,0, _receivedTimeOut);
                 host.AddServiceEndpoint(typeof(IRobot), binding , "");
-                host.Open();
-                Logging.LogMsgToFile("Host Service Started");
+                host.Open();               
             }
             catch (Exception ex)
             {
